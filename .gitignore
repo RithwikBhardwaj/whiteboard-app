@@ -1,6 +1,6 @@
 #files that don't need to be uploaded to github.
 
 # dependencies
-/node_modules
+node_modules
 
 # testing
