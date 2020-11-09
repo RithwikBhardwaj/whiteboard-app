@@ -41,29 +41,36 @@ _Run express with nodemon: save restarts server_
 
 - [ ] Socket.io: Connect devices
 - [ ] MongoDB
-  - [ ] User Database
   ```javascript
   [
-    {
-      ID: "1",
-      name: "Arpan",
-      RoomID: "8dss9dfdsd798fds",
-      Status: "active",
-    },
-  ];
-  ```
-  - [ ] Drawing Database
-  ```javascript
-  [
-    {
-      ID: "1",
-      RoomID:"8dss9dfdsd798fds"
-      Strokes: {
-        (collection of datapoints)
+    _id: ...,
+    host: user._id,
+    password: ...,
+    users: [
+      {
+        _id: ...,
+        username: {
+           type: string,
+          required: true
+        },
+        socket: string
       }
-      color: black
-      tool: pen (if add more tools)
+    ],
+    packets: [{
+      _id: ...,
+      user: {
+        type: string,
+        required: true
+      },
+     tool: {
+      type: string,
+      required: true
+    },
+    cordinates: {
+      type: [Number],
+      required: true
     }
+    }]
   ]
   ```
 - [ ] Host Control: freeze, force push, user async
