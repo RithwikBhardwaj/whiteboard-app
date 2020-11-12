@@ -8,4 +8,6 @@ const routeHelper = require('./routeHelper.js');
 router.route('/rooms')
   .get(routeHelper.returnRooms);
 
+
+
   module.exports = router;

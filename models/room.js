@@ -26,7 +26,7 @@ const packetSchema = new mongoose.Schema({
   },
   cordinates: {
     type: [{
-      type: Number,
+      type: [Number],
       // if needed
       /*
       min: 
@@ -39,13 +39,17 @@ const packetSchema = new mongoose.Schema({
 
 //schema for a room
 const roomSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   host: {
     type: String,
     required: true
   },
   password: String,
-  users: [ userSchema ],
-  packages: [ packetSchema ]
+  users: {type: [ userSchema ], default: []},
+  packages: {type: [ packetSchema ], default: []}
 });
 
 module.exports = mongoose.model('room', roomSchema);
