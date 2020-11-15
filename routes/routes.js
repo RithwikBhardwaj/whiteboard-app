@@ -8,6 +8,7 @@ const routeHelper = require('./routeHelper.js');
 router.route('/rooms')
   .get(routeHelper.returnRooms);
 
-
+router.route('/rooms/hostRoom')
+  .post(routeHelper.createRoom);
 
   module.exports = router;

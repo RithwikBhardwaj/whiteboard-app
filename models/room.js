@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 
 //schema for a user
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true
-  },
+  _id: String,
   socket: String,
   status: {
     type: String,
@@ -39,17 +36,14 @@ const packetSchema = new mongoose.Schema({
 
 //schema for a room
 const roomSchema = new mongoose.Schema({
-  name: {
+  _id: String,
+  host: String,
+  password: {
     type: String,
     required: true
   },
-  host: {
-    type: String,
-    required: true
-  },
-  password: String,
-  users: {type: [ userSchema ], default: []},
-  packages: {type: [ packetSchema ], default: []}
+  users: [ userSchema ],
+  packages: [ packetSchema ]
 });
 
 module.exports = mongoose.model('room', roomSchema);
