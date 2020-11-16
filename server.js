@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
+const path = require('path');
+const { Socket } = require('dgram');
 
 //Connect to cloud server
 mongoose.connect('mongodb+srv://Software_Dev_Club:63eEdBkh7SUEmajE@whiteboard-app.jphre.mongodb.net/<dbname>?retryWrites=true&w=majority', {
@@ -15,9 +17,11 @@ mongoose.connection.on('connected', ()=> {
 });
 
 //needed for socket.io
-const server = require('http').Server(app)
+const server = require('http').createServer(app)
 const io = require('socket.io')(server);
-
+io.on('connection', socket => {
+  
+});
 
 //middleware to parse json
 app.use(express.json());
