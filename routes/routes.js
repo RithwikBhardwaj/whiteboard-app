@@ -11,4 +11,7 @@ router.route('/rooms')
 router.route('/rooms/hostRoom')
   .post(routeHelper.createRoom);
 
+router.route('/rooms/:id')
+  .get(routeHelper.returnUsers);
+
 module.exports = router;

@@ -8,9 +8,7 @@ function Home() {
         Home
       </h1>
       <Link to='/login'>
-        <h3>
-          Login
-        </h3>
+        <h4>Login</h4>
       </Link>
     </div>
   );

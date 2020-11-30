@@ -1,8 +1,10 @@
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Login from './components/Login';
 import Home from './components/Home';
-import PathError from './components/pathError'
+import PathError from './components/pathError';
+import Board from './components/Board';
+import Canvas from './components/Canvas';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -11,8 +13,13 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/login">
+        <Route path='/login'>
           <Login/>
+        </Route>
+        <Route path="/board">
+          <Board>
+            <Canvas />
+          </Board>
         </Route>
         <Route path='*'>
           <PathError/>

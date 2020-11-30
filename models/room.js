@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 //schema for a user
 const userSchema = new mongoose.Schema({
   _id: String,
-  socket: String,
+  Socket: String,
   status: {
     type: String,
     default: 'Active'
