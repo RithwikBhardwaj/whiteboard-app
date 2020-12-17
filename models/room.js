@@ -1,5 +1,6 @@
 //dependencies
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 //schema for a user
 const userSchema = new mongoose.Schema({
@@ -21,7 +22,7 @@ const packetSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  cordinates: {
+  coordinates: {
     type: [{
       type: [Number],
       // if needed
@@ -45,5 +46,27 @@ const roomSchema = new mongoose.Schema({
   users: [ userSchema ],
   packages: [ packetSchema ]
 });
+
+
+roomSchema.pre('save', async function (next) {
+  try {
+    
+    const passwordHash = await bcrypt.hash(this.password, 12);
+    // Re-assign hashed version over original, plain text password
+    this.password = passwordHash;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+roomSchema.methods.isValidPassword = async function (newPassword) {
+  try {
+    return await bcrypt.compare(newPassword, this.password);
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 
 module.exports = mongoose.model('room', roomSchema);

@@ -10,7 +10,7 @@ module.exports = {
     let rooms = await Room.find();
     //check if there are rooms
     if(rooms.length === 0)
-      res.status(404).send('There are no rooms available');
+      res.status(200).send('There are no rooms available');
     else{
       let roomIds = [];
       rooms.forEach(room => roomIds.push(room._id))
@@ -26,7 +26,7 @@ module.exports = {
     
     //check if room already exists
     if((await Room.findOne({_id: roomName})) !== null)
-      res.status(400).send('Room already exists or missing room name');
+      res.status(400).send('Room already exists');
     else{
       //create room
       let room = new Room({

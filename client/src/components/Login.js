@@ -1,67 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import {BrowserRouter as Router, Switch, Route, Link, useRouteMatch} from 'react-router-dom';
-import Home from './Home';
+import {Link} from 'react-router-dom';
 
 function Login() {
   const [rooms, setRooms] = useState([])
-  let {url, path} = useRouteMatch()
   
   useEffect(() => {
     //fetch all rooms from backend
     const getRooms = async () => {
-      setRooms(axios.get('/rooms'))
+     
+      try {
+        let fetch = await axios.get('rooms')
+        if(fetch.data === 'There are no rooms available')
+            setRooms([])
+        else{
+          setRooms(fetch.data)
+        }
+      } catch (error) {
+        if(error.response){
+          console.log(error.response.status);
+          console.log(error.response.data);
+          }
+        else{
+          console.log(error);
+        }
     }
     
-    try {
-      getRooms()
-    } catch (error) {
-      if(error.response){
-        if(error.response.data === 'There are no rooms available'){
-          setRooms([])
-        }
-        else{
-          console.log(error.response.data);
-        }
-      }
-      else{
-        console.log(error);
-      }
     }
 
+    //run function
+    getRooms()
 
   }, []);
 
   return (
     <div>
-      {rooms.length!==0? 
+
+      {rooms.length === 0? 
       <div>
         <p>There are no joinable rooms</p>
-        <Link to={`${url}/host`}>
-        <h3>Create Room</h3>
-        </Link>
+        <Link to={`/host`}>Create Room</Link>
       </div>:
       <div>
-        <Link to={`${url}/host`}>
-        <h3>Join Room</h3>
-        </Link>
-        <Link to={`${url}/host`}>
-        <h3>Create Room</h3>
-        </Link>
+        <Link to={`/join`}>Join Room</Link>
+        <Link to={`/host`}>Create Room</Link>
       </div>
     }
-
-
-      <Router>
-      <Switch>
-        <Route path= {`${path}/join`}>
-          <Home />
-        </Route>
-        <Route path= {`${path}/host`}>
-        <Home />
-        </Route>
-      </Switch>
-    </Router>
     </div>
   )
 }

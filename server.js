@@ -6,7 +6,8 @@ const routes = require('./routes/routes');
 const Room = require('./models/Room');
 
 //Connect to cloud server
-mongoose.connect('mongodb+srv://Software_Dev_Club:63eEdBkh7SUEmajE@whiteboard-app.jphre.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+const db = require('./config/keys').mongoURI;
+mongoose.connect(db, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
