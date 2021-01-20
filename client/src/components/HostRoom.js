@@ -17,19 +17,17 @@ function HostRoom({updateLocal}) {
     resolver: joiResolver(schema),
   });
 
+  //validates and submits data to mongo server
   const onSubmit = async (data) => {
     try {
-      const fetch = await axios.post('rooms/hostRoom', {
+      const fetch = await axios.put('rooms/hostRoom', {
         name: data.room,
         username: data.username,
         password: data.password
       })
-      
+      console.log(fetch);
       if(fetch.data === 'Room Created'){
-        updateLocal({
-          name: data.room,
-          username: data.username
-        })
+        console.log("", data.room, " ", data.username)
     }
     } catch (error) {
       if(error.response){

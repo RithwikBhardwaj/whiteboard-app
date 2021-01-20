@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Board({ children }) {
+function Board({ children, room, username}) {
+
   return (
     <div>
-      <h3>Test</h3>
+      <h3>Tool Bar</h3>
       {children}
     </div>
   )

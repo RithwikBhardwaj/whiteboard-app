@@ -9,9 +9,9 @@ router.route('/rooms')
   .get(routeHelper.returnRooms);
 
 router.route('/rooms/hostRoom')
-  .post(routeHelper.createRoom);
+  .put(routeHelper.createRoom);
 
-router.route('/rooms/:id')
+router.route('/room')
   .get(routeHelper.returnUsers);
 
 module.exports = router;

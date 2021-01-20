@@ -6,21 +6,10 @@ import Board from './components/Board';
 import Canvas from './components/Canvas';
 import Login from './components/Login';
 import Host from './components/HostRoom'
-import { useState } from 'react';
+import Join from './components/JoinRoom'
 
 
 function App() {
-  const [local, setLocal] = useState({
-    username: '',
-    room: ''
-  })
-
-  function updateLocal(data) {
-    setLocal(
-      local.username = data.username,
-      local.room = data.name
-      )
-  }
 
   return (
     <Router>
@@ -32,14 +21,13 @@ function App() {
           <Login/>
         </Route>
         <Route exact path='/host'>
-          <Host updateLocal = {updateLocal}
-        />
+          <Host />
         </Route>
         <Route exact path='/join'>
-          <Home/>
+          <Join/>
         </Route>
         <Route exact path="/board">
-          <Board>
+          <Board >
             <Canvas />
           </Board>
         </Route>
@@ -47,9 +35,6 @@ function App() {
           <PathError/>
         </Route>
       </Switch>
-
-
-      {local.room !== '' && <Redirect to='/board' />}
     </Router>
   );
 }

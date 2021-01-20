@@ -50,7 +50,7 @@ const roomSchema = new mongoose.Schema({
 
 roomSchema.pre('save', async function (next) {
   try {
-    
+    //create encrypted password
     const passwordHash = await bcrypt.hash(this.password, 12);
     // Re-assign hashed version over original, plain text password
     this.password = passwordHash;
@@ -59,7 +59,7 @@ roomSchema.pre('save', async function (next) {
     next(error);
   }
 });
-
+//check plaintext password against encrypted password
 roomSchema.methods.isValidPassword = async function (newPassword) {
   try {
     return await bcrypt.compare(newPassword, this.password);

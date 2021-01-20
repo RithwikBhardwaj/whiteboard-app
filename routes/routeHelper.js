@@ -44,9 +44,9 @@ module.exports = {
   //return users in a specific room
   returnUsers: async (req, res) => {
     //parameters
-    let { id } = req.params;
+    let {id} = req.params;
+    console.log(id);
     let room = await Room.findOne({_id: id});
-    
     if(room === null){
       res.status(404).send('Room not found');
     }
